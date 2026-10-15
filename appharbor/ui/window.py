@@ -202,8 +202,8 @@ class AppHarborWindow(Adw.ApplicationWindow):
         dialog.set_application_icon("system-software-install-symbolic")
         dialog.set_developer_name("AppHarbor Team")
         dialog.set_version(__version__)
-        dialog.set_website("https://github.com/appharbor/appharbor")
-        dialog.set_issue_url("https://github.com/appharbor/appharbor/issues")
+        dialog.set_website("https://github.com/hmdamm/app-pakon")
+        dialog.set_issue_url("https://github.com/hmdamm/app-pakon/issues")
         dialog.set_license_type(Gtk.License.MIT_X11)
         dialog.set_comments(
             "A native GNOME application to discover, inspect, and safely remove "

@@ -17,15 +17,15 @@
       <li>Safe, explicit uninstallation with personal data preservation by default.</li>
       <li>Critical system component protection preventing accidental system breakage.</li>
       <li>Fault-tolerant discovery architecture where missing or failing tools never block other sources.</li>
-      <li>Accessible, polished UI adhering to a warm graphite and amber visual direction.</li>
+      <li>Accessible, polished UI adhering strictly to GNOME HIG and Libadwaita standards.</li>
     </ul>
   </description>
   <launchable type="desktop-id">io.github.appharbor.AppHarbor.desktop</launchable>
   <developer id="io.github.appharbor">
     <name>AppHarbor Team</name>
   </developer>
-  <url type="homepage">https://github.com/appharbor/appharbor</url>
-  <url type="bugtracker">https://github.com/appharbor/appharbor/issues</url>
+  <url type="homepage">https://github.com/hmdamm/app-pakon</url>
+  <url type="bugtracker">https://github.com/hmdamm/app-pakon/issues</url>
   <content_rating type="oars-1.1"/>
   <provides>
     <binary>appharbor</binary>

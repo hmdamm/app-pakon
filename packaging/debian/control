@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: AppHarbor Team <support@appharbor.org>
 Build-Depends: debhelper-compat (= 13), dh-python, python3-all, python3-setuptools
 Standards-Version: 4.6.2
-Homepage: https://github.com/appharbor/appharbor
+Homepage: https://github.com/hmdamm/app-pakon
 
 Package: appharbor
 Architecture: all

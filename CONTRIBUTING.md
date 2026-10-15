@@ -8,8 +8,8 @@ Thank you for your interest in contributing to AppHarbor! We welcome bug fixes, 
 
 1. Fork and clone the repository:
    ```bash
-   git clone https://github.com/appharbor/appharbor.git
-   cd appharbor
+   git clone https://github.com/hmdamm/app-pakon.git
+   cd app-pakon
    ```
 
 2. Ensure system dependencies are installed:

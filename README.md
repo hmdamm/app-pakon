@@ -8,8 +8,8 @@
 
 **Discover, inspect, and safely remove applications across Flatpak, Snap, AppImage, RPM, DEB, Pacman, Zypper, and manual launchers in one native GNOME interface.**
 
-[![Release](https://img.shields.io/github/v/release/appharbor/appharbor?color=3584e4&label=Release&logo=github)](https://github.com/appharbor/appharbor/releases)
-[![CI & Packaging](https://img.shields.io/github/actions/workflow/status/appharbor/appharbor/ci.yml?branch=main&label=Build%20%26%20CI&logo=githubactions)](https://github.com/appharbor/appharbor/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/hmdamm/app-pakon?color=3584e4&label=Release&logo=github)](https://github.com/hmdamm/app-pakon/releases)
+[![CI & Packaging](https://img.shields.io/github/actions/workflow/status/hmdamm/app-pakon/ci.yml?branch=main&label=Build%20%26%20CI&logo=githubactions)](https://github.com/hmdamm/app-pakon/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![GUI: GTK4 & Libadwaita](https://img.shields.io/badge/GUI-GTK4%20%2B%20Libadwaita-2ec27e?logo=gnome)](https://gitlab.gnome.org/GNOME/libadwaita)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776ab?logo=python)](https://www.python.org/)
@@ -73,7 +73,13 @@ Traditional software centers typically only reveal what is available to install 
 
 ### 1. Prebuilt Packages (Recommended)
 
-Download ready-to-install packages from the **[GitHub Releases](https://github.com/appharbor/appharbor/releases)** page:
+Download ready-to-install packages from the **[GitHub Releases](https://github.com/hmdamm/app-pakon/releases)** page:
+
+#### Portable AppImage (All Linux Distributions)
+```bash
+chmod +x AppHarbor-x86_64.AppImage
+./AppHarbor-x86_64.AppImage
+```
 
 #### Fedora / RHEL / CentOS Stream (`.rpm`)
 ```bash
@@ -91,8 +97,8 @@ sudo apt install ./appharbor_*_all.deb
 
 Build directly with `makepkg`:
 ```bash
-git clone https://github.com/appharbor/appharbor.git
-cd appharbor/packaging/arch
+git clone https://github.com/hmdamm/app-pakon.git
+cd app-pakon/packaging/arch
 makepkg -si
 ```
 
@@ -102,8 +108,8 @@ makepkg -si
 
 You can build and install a sandboxed bundle using `flatpak-builder`:
 ```bash
-git clone https://github.com/appharbor/appharbor.git
-cd appharbor
+git clone https://github.com/hmdamm/app-pakon.git
+cd app-pakon
 flatpak-builder --user --install --force-clean build-dir packaging/flatpak/io.github.appharbor.AppHarbor.yml
 ```
 
@@ -119,8 +125,8 @@ You can run AppHarbor directly on any Linux distribution with Python 3.10+, GTK 
 sudo dnf install python3-gobject gtk4 libadwaita
 
 # 2. Clone and launch
-git clone https://github.com/appharbor/appharbor.git
-cd appharbor
+git clone https://github.com/hmdamm/app-pakon.git
+cd app-pakon
 python3 main.py
 ```
 
@@ -131,8 +137,8 @@ sudo apt update
 sudo apt install python3-gi gir1.2-gtk-4.0 gir1.2-adw-1
 
 # 2. Clone and launch
-git clone https://github.com/appharbor/appharbor.git
-cd appharbor
+git clone https://github.com/hmdamm/app-pakon.git
+cd app-pakon
 python3 main.py
 ```
 
@@ -142,8 +148,8 @@ python3 main.py
 sudo pacman -S python-gobject gtk4 libadwaita
 
 # 2. Clone and launch
-git clone https://github.com/appharbor/appharbor.git
-cd appharbor
+git clone https://github.com/hmdamm/app-pakon.git
+cd app-pakon
 python3 main.py
 ```
 
