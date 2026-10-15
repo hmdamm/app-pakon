@@ -14,7 +14,6 @@ from gi.repository import Gdk, Gio, Gtk, Adw, Pango
 
 from appharbor.domain.models import InstallationRecord, ScopeEnum, SourceEnum
 from appharbor.system.capabilities import format_bytes
-from appharbor.ui.tokens import create_scope_badge, create_source_badge
 
 
 class DetailPanel(Gtk.Box):
@@ -125,20 +124,19 @@ class DetailPanel(Gtk.Box):
         id_lbl.set_selectable(True)
         title_box.append(id_lbl)
 
-        # Badges row
-        badges_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-        badges_box.set_margin_top(4)
-
-        badges_box.append(create_source_badge(record.source))
-        badges_box.append(create_scope_badge(record.scope))
-
+        # Plain secondary metadata text separated by bullets
+        meta_parts = [record.source.value, record.scope.value]
         if record.version:
-            ver_badge = Gtk.Label(label=f"v{record.version}")
-            ver_badge.add_css_class("badge-pill")
-            ver_badge.add_css_class("numeric")
-            badges_box.append(ver_badge)
+            meta_parts.append(f"v{record.version}")
+        meta_text = "  •  ".join(meta_parts)
 
-        title_box.append(badges_box)
+        meta_lbl = Gtk.Label(label=meta_text)
+        meta_lbl.add_css_class("caption")
+        meta_lbl.add_css_class("dim-label")
+        meta_lbl.set_halign(Gtk.Align.START)
+        meta_lbl.set_valign(Gtk.Align.CENTER)
+        meta_lbl.set_margin_top(2)
+        title_box.append(meta_lbl)
         hero_card.append(title_box)
 
         # Hero Action Area (Uninstall button)

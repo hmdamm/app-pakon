@@ -17,7 +17,6 @@ from appharbor.domain.models import (
 )
 from appharbor.inventory.orchestrator import InventoryOrchestrator, InventorySnapshot
 from appharbor.system.capabilities import format_bytes
-from appharbor.ui.tokens import create_source_badge
 
 
 class InventoryView(Gtk.Box):
@@ -235,17 +234,20 @@ class InventoryView(Gtk.Box):
             icon_name = record.icon_name_or_path or "application-x-executable-symbolic"
             img = Gtk.Image.new_from_icon_name(icon_name)
             img.set_pixel_size(32)
+            img.set_valign(Gtk.Align.CENTER)
             row.add_prefix(img)
 
-            # Suffix badge for source
-            row.add_suffix(create_source_badge(record.source))
-
-            # Formatted size if available
+            # Plain muted suffix text: format and size (e.g., "Flatpak · 11.8 MB")
+            suffix_parts = [record.source.value]
             if record.installed_size_bytes is not None:
-                size_lbl = Gtk.Label(label=format_bytes(record.installed_size_bytes))
-                size_lbl.add_css_class("caption")
-                size_lbl.add_css_class("dim-label")
-                size_lbl.add_css_class("numeric")
-                row.add_suffix(size_lbl)
+                suffix_parts.append(format_bytes(record.installed_size_bytes))
+            suffix_text = " · ".join(suffix_parts)
+
+            suffix_lbl = Gtk.Label(label=suffix_text)
+            suffix_lbl.add_css_class("caption")
+            suffix_lbl.add_css_class("dim-label")
+            suffix_lbl.add_css_class("numeric")
+            suffix_lbl.set_valign(Gtk.Align.CENTER)
+            row.add_suffix(suffix_lbl)
 
             self.list_box.append(row)
