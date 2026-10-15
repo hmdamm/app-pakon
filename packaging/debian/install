@@ -1,0 +1,3 @@
+data/io.github.appharbor.AppHarbor.desktop usr/share/applications/
+data/io.github.appharbor.AppHarbor.metainfo.xml usr/share/metainfo/
+data/icons/io.github.appharbor.AppHarbor.svg usr/share/icons/hicolor/scalable/apps/

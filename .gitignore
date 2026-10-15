@@ -40,3 +40,10 @@ htmlcov/
 # OS artifacts
 .DS_Store
 Thumbs.db
+
+# Internal planning & AI agent artifacts
+.agents/
+design-system/
+Implementation_Plan*.md
+*implementation-status.md
+*project_status.md

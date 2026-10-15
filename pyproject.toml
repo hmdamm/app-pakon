@@ -36,7 +36,7 @@ dev = [
 ]
 
 [project.scripts]
-appharbor = "main:main"
+appharbor = "appharbor.main:main"
 
 [tool.setuptools.packages.find]
 include = ["appharbor*"]
