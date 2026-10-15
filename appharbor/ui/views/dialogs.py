@@ -1,4 +1,4 @@
-"""Safe uninstallation confirmation dialog."""
+"""Safe uninstallation confirmation dialog conforming to GNOME HIG."""
 
 from __future__ import annotations
 
@@ -12,134 +12,81 @@ from gi.repository import Gtk, Adw, Pango
 from appharbor.domain.models import InstallationRecord, UninstallPlan
 
 
-class SafeUninstallDialog(Adw.Window):
-    """Modal dialog presenting explicit uninstallation consequences before action."""
+def show_safe_uninstall_dialog(
+    parent: Gtk.Widget,
+    record: InstallationRecord,
+    plan: UninstallPlan,
+    on_confirm: Callable[[bool], None],
+) -> Adw.AlertDialog:
+    """Display an idiomatic Adw.AlertDialog with destructive styling and explicit data options."""
+    dialog = Adw.AlertDialog(
+        heading=f"Uninstall {record.name}?",
+        body=(
+            f"Are you sure you want to remove this application package?\n"
+            f"Package: {record.package_id} · Source: {record.source.value} · Scope: {record.scope.value}"
+        ),
+    )
+
+    dialog.add_response("cancel", "Cancel")
+    dialog.add_response("uninstall", "Uninstall")
+    dialog.set_response_appearance("uninstall", Adw.ResponseAppearance.DESTRUCTIVE)
+    dialog.set_default_response("cancel")
+    dialog.set_close_response("cancel")
+
+    # Extra options in a clean PreferencesGroup
+    group = Adw.PreferencesGroup()
+
+    # Elevation notice if applicable
+    if plan.requires_elevation:
+        elev_row = Adw.ActionRow()
+        elev_row.set_title("Administrator Authorization Required")
+        elev_row.set_subtitle("System authorization (Polkit) will be requested to complete this action.")
+        img = Gtk.Image.new_from_icon_name("dialog-password-symbolic")
+        elev_row.add_prefix(img)
+        group.add(elev_row)
+
+    # Personal data switch row (default OFF to preserve data)
+    switch_row = Adw.SwitchRow()
+    switch_row.set_title("Delete Personal Data and User Settings")
+    switch_row.set_subtitle("Default is OFF to keep application data in your home directory")
+    switch_row.set_active(False)
+    group.add(switch_row)
+
+    # Command preview row
+    if plan.commands_to_run:
+        cmd_row = Adw.ActionRow()
+        cmd_row.set_title("Command to Execute")
+        cmd_str = " ".join(plan.commands_to_run[0])
+        cmd_row.set_subtitle(cmd_str)
+        cmd_row.add_css_class("property")
+        cmd_row.set_subtitle_selectable(True)
+        img_term = Gtk.Image.new_from_icon_name("utilities-terminal-symbolic")
+        cmd_row.add_prefix(img_term)
+        group.add(cmd_row)
+
+    dialog.set_extra_child(group)
+
+    def _on_response(dlg: Adw.AlertDialog, response_id: str) -> None:
+        if response_id == "uninstall":
+            keep_data = not switch_row.get_active()
+            on_confirm(keep_data)
+
+    dialog.connect("response", _on_response)
+    dialog.present(parent)
+    return dialog
+
+
+class SafeUninstallDialog:
+    """Backwards compatibility shim for existing call sites."""
 
     def __init__(
         self,
-        parent: Gtk.Window,
+        parent: Gtk.Widget,
         record: InstallationRecord,
         plan: UninstallPlan,
         on_confirm: Callable[[bool], None],
     ):
-        super().__init__()
-        self.set_transient_for(parent)
-        self.set_modal(True)
-        self.set_title("Confirm Uninstallation")
-        self.set_default_size(460, -1)
-        self.set_resizable(False)
+        self._dialog = show_safe_uninstall_dialog(parent, record, plan, on_confirm)
 
-        self._record = record
-        self._plan = plan
-        self._on_confirm = on_confirm
-
-        self._build_ui()
-
-    def _build_ui(self) -> None:
-        main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=16)
-        main_box.set_margin_top(24)
-        main_box.set_margin_bottom(24)
-        main_box.set_margin_start(24)
-        main_box.set_margin_end(24)
-
-        # Header Icon & Title
-        header_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=14)
-        icon = Gtk.Image.new_from_icon_name(self._record.icon_name_or_path or "application-x-executable")
-        icon.set_pixel_size(48)
-        header_box.append(icon)
-
-        title_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=2)
-        title_lbl = Gtk.Label(label=f"Uninstall {self._record.name}?")
-        title_lbl.add_css_class("detail-title")
-        title_lbl.set_halign(Gtk.Align.START)
-        title_lbl.set_ellipsize(Pango.EllipsizeMode.END)
-
-        pkg_lbl = Gtk.Label(label=f"Package ID: {self._record.package_id}")
-        pkg_lbl.add_css_class("detail-package-id")
-        pkg_lbl.set_halign(Gtk.Align.START)
-
-        title_box.append(title_lbl)
-        title_box.append(pkg_lbl)
-        header_box.append(title_box)
-        main_box.append(header_box)
-
-        # Details list group
-        group = Adw.PreferencesGroup()
-        group.set_title("Package Details")
-
-        row_src = Adw.ActionRow()
-        row_src.set_title("Installation Source")
-        row_src.set_subtitle(self._record.source.value)
-        group.add(row_src)
-
-        row_scope = Adw.ActionRow()
-        row_scope.set_title("Installation Scope")
-        row_scope.set_subtitle(self._record.scope.value)
-        group.add(row_scope)
-
-        if self._record.install_path:
-            row_path = Adw.ActionRow()
-            row_path.set_title("Installation Path")
-            row_path.set_subtitle(self._record.install_path)
-            group.add(row_path)
-
-        main_box.append(group)
-
-        # Elevation warning if applicable
-        if self._plan.requires_elevation:
-            elev_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
-            elev_box.add_css_class("warning-box")
-            elev_icon = Gtk.Image.new_from_icon_name("dialog-password-symbolic")
-            elev_lbl = Gtk.Label(
-                label="Administrator authorization (Polkit) will be requested by the system to remove this package."
-            )
-            elev_lbl.set_wrap(True)
-            elev_box.append(elev_icon)
-            elev_box.append(elev_lbl)
-            main_box.append(elev_box)
-
-        # Personal data handling checkbox
-        data_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
-        self.data_check = Gtk.CheckButton(label="Also delete user settings and personal data")
-        self.data_check.set_active(False)  # Default: PRESERVE DATA!
-
-        data_desc = Gtk.Label(
-            label="By default, personal configuration files in your home directory are preserved."
-        )
-        data_desc.add_css_class("app-subtitle")
-        data_desc.set_wrap(True)
-        data_desc.set_halign(Gtk.Align.START)
-
-        data_box.append(self.data_check)
-        data_box.append(data_desc)
-
-        if self._plan.user_data_paths:
-            path_lbl = Gtk.Label(label=f"Identified path: {self._plan.user_data_paths[0]}")
-            path_lbl.add_css_class("detail-prop-mono")
-            path_lbl.set_halign(Gtk.Align.START)
-            data_box.append(path_lbl)
-
-        main_box.append(data_box)
-
-        # Action Buttons
-        btn_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=12)
-        btn_box.set_halign(Gtk.Align.END)
-        btn_box.set_margin_top(8)
-
-        cancel_btn = Gtk.Button(label="Cancel")
-        cancel_btn.connect("clicked", lambda b: self.close())
-
-        uninstall_btn = Gtk.Button(label="Uninstall Application")
-        uninstall_btn.add_css_class("btn-destructive")
-        uninstall_btn.connect("clicked", self._on_uninstall_clicked)
-
-        btn_box.append(cancel_btn)
-        btn_box.append(uninstall_btn)
-        main_box.append(btn_box)
-
-        self.set_content(main_box)
-
-    def _on_uninstall_clicked(self, btn: Gtk.Button) -> None:
-        keep_data = not self.data_check.get_active()
-        self.close()
-        self._on_confirm(keep_data)
+    def present(self) -> None:
+        pass
