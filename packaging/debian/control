@@ -1,0 +1,15 @@
+Source: appharbor
+Section: utils
+Priority: optional
+Maintainer: AppHarbor Team <support@appharbor.org>
+Build-Depends: debhelper-compat (= 13), dh-python, python3-all, python3-setuptools
+Standards-Version: 4.6.2
+Homepage: https://github.com/appharbor/appharbor
+
+Package: appharbor
+Architecture: all
+Depends: ${misc:Depends}, ${python3:Depends}, python3-gi, gir1.2-gtk-4.0, gir1.2-adw-1
+Description: Universal Linux Application Manager
+ AppHarbor is a modern, reliable desktop utility that unifies application
+ discovery, metadata inspection, and safe uninstallation across Flatpak,
+ DEB/APT, Snap, AppImage, and manual installations.

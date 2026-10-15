@@ -1,0 +1,270 @@
+/* AppHarbor Custom Warm Graphite & Ivory Styling */
+
+/* Window & Base Colors */
+window.appharbor-window {
+    background-color: @theme_bg_color;
+    color: @theme_fg_color;
+}
+
+/* HeaderBar Styling */
+headerbar.appharbor-headerbar {
+    border-bottom: 1px solid alpha(@theme_fg_color, 0.12);
+    padding: 4px 8px;
+}
+
+.app-title {
+    font-weight: 700;
+    font-size: 15pt;
+    letter-spacing: -0.01em;
+}
+
+.app-subtitle {
+    font-size: 10pt;
+    opacity: 0.75;
+}
+
+/* Search and Filter Area */
+.search-container {
+    padding: 12px 16px 8px 16px;
+    background-color: alpha(@theme_fg_color, 0.02);
+    border-bottom: 1px solid alpha(@theme_fg_color, 0.08);
+}
+
+.filter-bar {
+    padding: 6px 16px 12px 16px;
+    border-bottom: 1px solid alpha(@theme_fg_color, 0.06);
+}
+
+/* Filter Buttons (Pills) */
+button.filter-pill {
+    border-radius: 9999px;
+    padding: 4px 12px;
+    font-size: 10.5pt;
+    font-weight: 500;
+    margin-right: 6px;
+    transition: all 150ms ease-out;
+    border: 1px solid alpha(@theme_fg_color, 0.15);
+    background-color: transparent;
+    color: @theme_fg_color;
+}
+
+button.filter-pill:hover {
+    background-color: alpha(@theme_fg_color, 0.08);
+}
+
+button.filter-pill.active {
+    background-color: #D97706;
+    color: #FFFFFF;
+    border-color: #B45309;
+    font-weight: 600;
+}
+
+.filter-count {
+    font-size: 9pt;
+    padding: 1px 6px;
+    border-radius: 9999px;
+    margin-left: 6px;
+    background-color: alpha(@theme_fg_color, 0.12);
+}
+
+button.filter-pill.active .filter-count {
+    background-color: alpha(#FFFFFF, 0.25);
+    color: #FFFFFF;
+}
+
+/* Application List Rows */
+.app-row {
+    padding: 10px 16px;
+    border-bottom: 1px solid alpha(@theme_fg_color, 0.06);
+    transition: background-color 150ms ease-out;
+}
+
+.app-row:hover {
+    background-color: alpha(@theme_fg_color, 0.05);
+}
+
+.app-row:selected {
+    background-color: alpha(#D97706, 0.18);
+    border-left: 3px solid #D97706;
+}
+
+.app-row-name {
+    font-weight: 600;
+    font-size: 11.5pt;
+}
+
+.app-row-id {
+    font-size: 9.5pt;
+    opacity: 0.65;
+    font-family: monospace;
+}
+
+.app-row-version {
+    font-size: 9pt;
+    opacity: 0.7;
+    margin-left: 8px;
+}
+
+.app-row-size {
+    font-size: 9.5pt;
+    opacity: 0.65;
+    margin-right: 8px;
+}
+
+/* Source & Scope Chips */
+.chip {
+    font-size: 8.5pt;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    margin-right: 4px;
+}
+
+.chip-flatpak {
+    background-color: alpha(#3B82F6, 0.15);
+    color: #60A5FA;
+    border: 1px solid alpha(#3B82F6, 0.3);
+}
+
+.chip-rpm {
+    background-color: alpha(#D97706, 0.15);
+    color: #F59E0B;
+    border: 1px solid alpha(#D97706, 0.3);
+}
+
+.chip-snap {
+    background-color: alpha(#EA580C, 0.15);
+    color: #FB923C;
+    border: 1px solid alpha(#EA580C, 0.3);
+}
+
+.chip-appimage {
+    background-color: alpha(#10B981, 0.15);
+    color: #34D399;
+    border: 1px solid alpha(#10B981, 0.3);
+}
+
+.chip-deb {
+    background-color: alpha(#EC4899, 0.15);
+    color: #F472B6;
+    border: 1px solid alpha(#EC4899, 0.3);
+}
+
+.chip-manual, .chip-unknown {
+    background-color: alpha(#71717A, 0.15);
+    color: #A1A1AA;
+    border: 1px dashed alpha(#71717A, 0.4);
+}
+
+.chip-system {
+    background-color: alpha(@theme_fg_color, 0.08);
+    color: alpha(@theme_fg_color, 0.75);
+    border: 1px solid alpha(@theme_fg_color, 0.15);
+}
+
+.chip-user {
+    background-color: alpha(#15803D, 0.18);
+    color: #4ADE80;
+    border: 1px solid alpha(#15803D, 0.35);
+}
+
+/* Detail Inspection Panel */
+.detail-panel {
+    background-color: alpha(@theme_fg_color, 0.02);
+    padding: 20px 24px;
+}
+
+.detail-header-card {
+    padding: 16px;
+    border-radius: 8px;
+    background-color: alpha(@theme_fg_color, 0.04);
+    border: 1px solid alpha(@theme_fg_color, 0.08);
+    margin-bottom: 20px;
+}
+
+.detail-title {
+    font-size: 16pt;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.detail-package-id {
+    font-family: monospace;
+    font-size: 10pt;
+    opacity: 0.65;
+}
+
+.detail-section-title {
+    font-size: 11pt;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.6;
+    margin-top: 16px;
+    margin-bottom: 8px;
+}
+
+.detail-prop-label {
+    font-size: 10pt;
+    opacity: 0.65;
+    font-weight: 500;
+}
+
+.detail-prop-value {
+    font-size: 10.5pt;
+    font-weight: 400;
+}
+
+.detail-prop-mono {
+    font-family: monospace;
+    font-size: 9.5pt;
+}
+
+/* Warnings and Guards */
+.warning-box {
+    background-color: alpha(#C2410C, 0.12);
+    border: 1px solid alpha(#C2410C, 0.3);
+    color: #F97316;
+    padding: 12px 14px;
+    border-radius: 6px;
+    margin-top: 12px;
+    font-size: 10pt;
+}
+
+.critical-box {
+    background-color: alpha(#DC2626, 0.15);
+    border: 1px solid alpha(#DC2626, 0.4);
+    color: #EF4444;
+    padding: 12px 14px;
+    border-radius: 6px;
+    margin-top: 12px;
+    font-size: 10pt;
+    font-weight: 500;
+}
+
+/* Destructive Uninstall Button */
+button.btn-destructive {
+    background-color: #DC2626;
+    color: #FFFFFF;
+    font-weight: 600;
+    border-radius: 6px;
+    padding: 8px 18px;
+    transition: background-color 150ms ease-out;
+}
+
+button.btn-destructive:hover {
+    background-color: #B91C1C;
+}
+
+button.btn-destructive:disabled {
+    background-color: alpha(#DC2626, 0.3);
+    color: alpha(#FFFFFF, 0.5);
+}
+
+/* Focus Indicator for Keyboard Navigation */
+button:focus-visible, entry:focus-visible, row:focus-visible {
+    outline: 2px solid #D97706;
+    outline-offset: 2px;
+}

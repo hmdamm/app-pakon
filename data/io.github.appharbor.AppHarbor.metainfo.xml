@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.appharbor.AppHarbor</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <name>AppHarbor</name>
+  <summary>Universal Linux Application Manager</summary>
+  <description>
+    <p>
+      AppHarbor gives users one clear, trustworthy place to discover, inspect, and safely remove
+      applications installed through different packaging methods on Linux.
+    </p>
+    <p>Features:</p>
+    <ul>
+      <li>Single unified inventory across Flatpak, RPM/DNF, Snap, AppImage, DEB/APT, Pacman, Zypper, and manual desktop entries.</li>
+      <li>Strict separation of installation source from installation scope (System vs User).</li>
+      <li>Safe, explicit uninstallation with personal data preservation by default.</li>
+      <li>Critical system component protection preventing accidental system breakage.</li>
+      <li>Fault-tolerant discovery architecture where missing or failing tools never block other sources.</li>
+      <li>Accessible, polished UI adhering to a warm graphite and amber visual direction.</li>
+    </ul>
+  </description>
+  <launchable type="desktop-id">io.github.appharbor.AppHarbor.desktop</launchable>
+  <developer id="io.github.appharbor">
+    <name>AppHarbor Team</name>
+  </developer>
+  <url type="homepage">https://github.com/appharbor/appharbor</url>
+  <url type="bugtracker">https://github.com/appharbor/appharbor/issues</url>
+  <content_rating type="oars-1.1"/>
+  <provides>
+    <binary>appharbor</binary>
+  </provides>
+  <releases>
+    <release version="0.1.0" date="2026-10-15">
+      <description>
+        <p>Initial release of AppHarbor.</p>
+      </description>
+    </release>
+  </releases>
+</component>

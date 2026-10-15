@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#27272A"/>
+      <stop offset="100%" stop-color="#18181B"/>
+    </linearGradient>
+    <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+    <linearGradient id="terracottaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EA580C"/>
+      <stop offset="100%" stop-color="#C2410C"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background Rounded Rect -->
+  <rect x="8" y="8" width="112" height="112" rx="28" fill="url(#bgGrad)" stroke="#3F3F46" stroke-width="2"/>
+
+  <!-- Docking Base Plate -->
+  <rect x="28" y="86" width="72" height="10" rx="5" fill="#3F3F46"/>
+
+  <!-- Multi-Source Layered Package / Harbor Symbol -->
+  <!-- Layer 1: Bottom Package -->
+  <path d="M34 76 L64 62 L94 76 L64 90 Z" fill="url(#terracottaGrad)" opacity="0.9"/>
+  
+  <!-- Layer 2: Middle Package -->
+  <path d="M34 56 L64 42 L94 56 L64 70 Z" fill="url(#amberGrad)"/>
+
+  <!-- Layer 3: Top Package Core -->
+  <path d="M42 38 L64 28 L86 38 L64 48 Z" fill="#FDE68A"/>
+
+  <!-- Protective Harbor Arch -->
+  <path d="M64 20 A44 44 0 0 1 104 68" fill="none" stroke="#D97706" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 6"/>
+  <path d="M64 20 A44 44 0 0 0 24 68" fill="none" stroke="#D97706" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 6"/>
+</svg>
